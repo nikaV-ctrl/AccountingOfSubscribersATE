@@ -19,5 +19,9 @@ python manage.py runserver
 
 npm start
 
+
+![Uploading image.png…]()
+
 ![image](https://user-images.githubusercontent.com/102410474/193573658-26c0fbd8-da63-41c2-945b-fe25daaac2a8.png)
+
 
