@@ -1,0 +1,19 @@
+django + react
+
+тут есть файлы с запросами и отчетами, где осуществлен поиск
+
+admin
+12345
+
+1  terminal:
+env 
+..\project\myDjango
+python manage.py runserver
+
+2 terminal:
+..\project\myDjango\frontend
+npm start
+
+
+
+

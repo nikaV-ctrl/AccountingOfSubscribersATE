@@ -1,0 +1,45 @@
+# 1
+python -m venv env
+
+# 2
+cd env
+cd scripts
+
+# .\activate 
+cmd
+activate
+
+# 3
+pip install django
+
+# 4
+django-admin.py startproject _
+
+# 5
+python manage.py runserver
+
+# 6
+python manage.py startapp _
+
+# 7
+npx create-react-app _
+
+# 8   cd reactProject /      
+npm start
+
+# 9 
+pip install djangorestframework 
+pip install django-cors-headers
+
+# 10
+python manage.py createsuperuser
+
+#11
+npm install bootstrap reactstrap axios --save
+
+# 12 
+npm install react-router-dom
+
+# 13
+pip install django-filters
+

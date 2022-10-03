@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div div>
+        <h5 class="alert alert-secondary" role="alert">1. Финансовый отчет о поступлении сумм оплату за «I-е» число.</h5>
+        <p></p>
+
+        <form class="input-group mb-3">
+        <input type="search" name="q1" class="form-control" placeholder="Поиск по дате оплаты ..." aria-label="Search1">
+        <p></p>
+        <button type="submit" class="btn btn-light text-dark me-2">Найти</button>
+      </form>
+
+      <br>
+      {% if resultReport1 %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Дата</th>
+            <th scope="col">Сумма оплаты</th>
+          </tr>
+        </thead>
+        {% for i in resultReport1 %}
+        <tr>
+          <td>{{ i.date }}</td>
+          <td>{{ i.payment_amount }}</td>
+        {% endfor %}
+      </tr>
+      </table>
+      {% else %}
+      <h6 class="text-center alert alert-warning">Нет записей!</h6>
+      {% endif %}
+      <br><br>
+
+      <h5 class="alert alert-secondary" role="alert">2. Список сотрудников, устанавливающих телефоны  «I-го» числа.</h5>
+      <p></p>
+
+        <form class="input-group mb-3">
+        <input type="search" name="q2" class="form-control" placeholder="Поиск по дате установки ..." aria-label="Search2">
+        <p></p>
+        <button type="submit" class="btn btn-light text-dark me-2">Найти</button>
+      </form>
+
+      <br>
+      {% if resultReport2 %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Код сотрудника</th>
+            <th scope="col">ФИО</th>
+            <th scope="col">Дата установки</th>
+          </tr>
+        </thead>
+        {% for i in resultReport2 %}
+        <tr>
+          <td>{{ i.employee_code.employee_code }}</td>
+          <td>{{ i.employee_code.name }}</td>
+          <td>{{ i.data_installations }}</td>
+        {% endfor %}
+      </tr>
+      </table>
+      {% else %}
+      <h6 class="text-center alert alert-warning">Нет записей!</h6>
+      {% endif %}
+      <br><br>
+
+
+      <h5 class="alert alert-secondary" role="alert">3. Список владельцев, имеющих льготы «I-го» типа.</h5>
+      <p></p>
+        
+
+        <form class="input-group mb-3" method="get">
+        <select name="q3" class="form-select" aria-label="Default select example">
+          <option selected value="0">Выберите льготу</option>
+          {% for i in selectLgoty %}
+            <option option value="{{ i.code_lgoty }}">{{ i.name_lgoty }}</option>
+          {% endfor %}
+        </select>
+        <p></p>
+        <button type="submit" class="btn btn-light text-dark me-2">Найти</button>
+      </form>
+      <br>
+
+
+      {% if resultReport3 %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ИИН владельца</th>
+            <th scope="col">ФИО</th>
+            <th scope="col">Льгота</th>
+          </tr>
+        </thead>
+        {% for i in resultReport3 %}
+        <tr>
+          <td>{{ i.IIN }}</td>
+          <td>{{ i.FIO }}</td>
+          <td>{{ i.code_type_lgoty.name_lgoty }}</td>
+          {% endfor %}
+        </tr>
+      </table>
+      {% else %}
+      <h6 class="text-center alert alert-warning">Нет записей!</h6>
+      {% endif %}
+
+
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <br><br>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+    <div id="list-example" class="list-group">
+      <a class="list-group-item list-group-item-action" href="#list-item-1">1. Количество телефонов, установленных
+        каждым из сотрудников по датам.</a>
+      <a class="list-group-item list-group-item-action" href="#list-item-2">2. Список телефонов клиентов, проживающих по
+        адресу "...".</a>
+      <a class="list-group-item list-group-item-action" href="#list-item-3">3. Количество телефонных номеров у каждого
+        из клиентов.</a>
+      <a class="list-group-item list-group-item-action" href="#list-item-4">4. ФИО владельцев "i-ой" пары спаренных
+        телефонов.</a>
+      <a class="list-group-item list-group-item-action" href="#list-item-5">5. Количество владельцев.</a>
+    </div>
+  </div>
+  <div class="col">
+    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+      <h5 id="list-item-1" class="alert alert-secondary" role="alert">1. Количество телефонов, установленных каждым из
+        сотрудников по датам.</h5>
+      <br><br>
+
+      {% if request1 %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Код сотрудника</th>
+            <th scope="col">ФИО</th>
+            <th scope="col">Количество установленных телефонов</th>
+            <th scope="col">Дата</th>
+          </tr>
+        </thead>
+        {% for i, j in request1 %}
+        <tr>
+          <td>{{ i.employee_code }}</td>
+          <td>{{ j.employee_code.name }}</td>
+          <td>{{ i.tot }}</td>
+          <td>{{ j.data_installations }}</td>
+          {% endfor %}
+        </tr>
+      </table>
+      {% else %}
+      <h6 class="text-center alert alert-warning">Нет записей!</h6>
+      {% endif %}
+
+      <h5 id="list-item-2" class="alert alert-secondary"
+        role="alert"">2. Список телефонов клиентов, проживающих по адресу " ...".</h4>
+        <br>
+
+        <form class="input-group mb-3">
+          <input type="search" name="q" class="form-control" placeholder="Поиск по адресу..." aria-label="Search2">
+          <p></p>
+          <button type="submit" class="btn btn-light text-dark me-2">Найти</button>
+        </form>
+
+        <br>
+        {% if phoneNumbers %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Телефон</th>
+              <th scope="col">Название улицы</th>
+              <th scope="col">Дом</th>
+              <th scope="col">Квартира</th>
+            </tr>
+          </thead>
+          {% for i in phoneNumbers %}
+          <tr>
+            <td>{{ i.phone_number }}</td>
+            <td>{{ i.street_code.name }}</td>
+            <td>{{ i.house_number }}</td>
+            <td>{{ i.apartment_number }}</td>
+            {% endfor %}
+          </tr>
+        </table>
+        {% else %}
+        <h6 class="text-center alert alert-warning">Нет записей!</h6>
+        {% endif %}
+
+        <br><br>
+        <h5 id="list-item-3" class="alert alert-secondary" role="alert">3. Количество телефонных номеров у каждого из
+          клиентов.</h5>
+        <br>
+
+
+        {% if request3 %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Клиент</th>
+              <th scope="col">Количество номеров</th>
+            </tr>
+          </thead>
+
+          {% for a, b in request3 %}
+          <tr>
+            <td>{{ b.owner_IIN.FIO }}</td>
+            <td>{{ a.count3 }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <h5 class="text-center alert alert-warning">Нет записей!</h5>
+        {% endif %}
+        <br><br>
+
+
+        <h5 id="list-item-4" class="alert alert-secondary" role="alert">4. ФИО владельцев "i-ой" пары спаренных
+          телефонов.</h5>
+        <br>
+
+        <form class="input-group mb-3">
+          <input type="search" name="q4" class="form-control" placeholder="Поиск по номеру пары..."
+            aria-label="Search4">
+          <p></p>
+          <button type="submit" class="btn btn-light text-dark me-2">Найти</button>
+        </form>
+        <br>
+
+        {% if payments %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ФИО</th>
+              <th scope="col">Номер телефона</th>
+            </tr>
+          </thead>
+          {% for i in payments %}
+          <tr>
+            <td>{{ i.owner_IIN.FIO }}</td>
+            <td>{{ i.phone_number }}</td>
+            {% endfor %}
+          </tr>
+        </table>
+        {% else %}
+        <h6 class="text-center alert alert-warning">Нет записей!</h6>
+        {% endif %}
+        <br><br>
+
+        <h5 id="list-item-5" class="alert alert-secondary" role="alert">5. Количество владельцев.</h5>
+        <br>
+        <p class="bg-white text-dark">Количество владельцев - <b>мужчин:</b> {{ resultMen }}</p>
+        <p class="bg-white text-dark">Количество владельцев - <b>женщин:</b> {{ resultWomen }}</p>
+        </p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+{% endblock %}
